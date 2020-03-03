@@ -1,0 +1,72 @@
+#include <kipr/wombat.h>
+
+int main()
+{
+    int pom_counter = 960;
+    int down_counter = 960;
+    int up_counter = 206;
+    int back  = 500;
+    int green = 70;
+    int red   = 400;
+    int down  = 216;
+    int up    = 399;   
+    printf("Hello World\n");
+    create_connect();
+    msleep(150);
+    create_safe();
+    enable_servo(0);
+    
+    set_servo_position(0,984);
+    msleep(500);
+     //wait_for_light();
+    //shut_down_in(119);
+    set_create_total_angle(0);
+    while (get_create_total_angle() < 80)
+    {
+       create_drive_direct(-50,50);  
+    }
+    set_servo_position(0,down);//need to enter value later for bulldoser down
+    msleep(500);
+
+    msleep(250);
+    
+    
+    
+     set_create_distance(0);
+    while (get_create_distance() <red) // need to change distance to exact later
+    {
+        
+        create_drive_direct(100,100);
+    }
+    create_stop();
+   msleep(1000);
+   while(get_servo_position(0) < 923)
+  {set_servo_position(0, up_counter);
+   up_counter = up_counter + 5;
+   msleep(10);
+  }
+   
+    
+      set_create_distance(0);
+    while (get_create_distance() < green) // need to change distance to exact later
+    {
+        create_drive_direct(50,50);
+    }
+    
+  while(get_servo_position(0) >210)
+  {set_servo_position(0, down_counter);
+   down_counter = down_counter-10;
+   msleep(10);
+  }
+   
+    
+    while (digital (0) == 0) // need to change distance to exact later
+    {
+        
+        create_drive_direct(-100,-100);
+        msleep(2000);
+    }
+   create_stop();
+    msleep(500);
+    return 0;
+}
