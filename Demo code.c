@@ -3,7 +3,7 @@
 int main()
 {
     printf("Hello World\n");
-   //wait_for_light(3);
+    wait_for_light(3);
     shut_down_in(119);
     enable_servos();
     set_servo_position(0,2047);
